@@ -1,46 +1,72 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-export const Div = styled.div `
-    input {
-        width: 300px;
-        height: 50px;
-        border: 2px solid #555;
-        border-radius: 15px 0px 15px 0px;
-        outline: none;
+export const FormFieldRapper = styled.div`
+    position: relative;
+    textarea{
+        min-height: 59px;
     }
-    input[type=text]{
-        border-bottom: 5px solid tomato;
-        font-size: 1.1em;
-        background: transparent;
-        color: white;
-        margin: 10px 0px;
-        padding-top: 25px;
-        padding-left: 10px;
+    input[type='color']{
+        padding-left: 56px;
     }
-    input[type=color]{
-        margin-top: 10px;
-        margin-bottom: 20px;
-        background: rgba(255, 255, 255, 2.3);
-        padding: 8px 10px;
-        transition: 0.5s ease;
+`
+export const Label = styled.label `
 
-        &:hover{
-            background: tomato;
+`
+export const LabelText = styled.span`
+    color: #e5e5e5;
+    height: 57px;
+    position: absolute;
+    top: 0;
+    left: 16px;
+
+    display: flex;
+    align-items: center;
+
+    transform-origin: 0% 0%;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 300;
+
+    transition: .1s ease-in-out;
+`
+
+export const Input = styled.input`
+    background: #535850;
+    color: #f5f5f5;
+    display: block;
+    width: 100%;
+    height: 57px;
+    font-size: 18px; 
+
+    cursor: pointer; 
+
+    outline: 0;
+    border: 0;
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid #535850;  
+
+    padding: 16px 16px;
+    margin-bottom: 45px;
+
+    resize: none;
+    border-radius: 4px;
+    transition: border-color .3s;
+
+    &:focus {
+        border-bottom-color: var(--primary);
+    }
+    &:focus:not([type="color"]) + span {
+        transform: scale(.6) translateY(-10px);
+    }
+
+    ${ ({ hasValue }) => { 
+
+        return hasValue && css`
+            &:not([type="color"]) + span {
+            transform: scale(.6) translateY(-10px);
         }
-    }
-    input::placeholder{
-        font-size: 1.1em;
-        color: white;
-        text-align: bottom;
-        transition: 0.4s;
-    }
-    input:hover::placeholder,
-    input:focus::placeholder{
-        color: rgba(255, 255, 255, 0.6);
-        transform: translateY(-20px);
-        font-size: 12px;
-        letter-spacing: 0.1em;
-    }
+        `
+    }}
 `
 export const Button = styled.button `
     width: 150px;
@@ -52,9 +78,12 @@ export const Button = styled.button `
     font-family: 'Roboto', 'monospace';
     font-size: 32px;
     transition: 0.8s ease;
+    cursor: pointer;
 
     &:hover {
         color: #000;
         background: white;
     }
 `
+
+

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import PageDefault from '../../../components/PageDefault'
 import { Link } from 'react-router-dom'
 import FormField from '../../../components/FormField'
@@ -42,6 +42,21 @@ function CadastroCategoria() {
         setValues(valoresIniciais) //zera o input após cadastrar
     }
 
+    useEffect(() => { //quando queremos que algum efeito colateral aconteça
+        //estou pegando informações do back end
+        
+        const url = 'http://localhost:3030/categorias'
+
+        fetch(url)
+            .then(async (respostaServidor) => {
+                const resposta = await respostaServidor.json()
+                setCategorias([
+                    ...resposta,
+                ])
+            })
+        
+    }, []) //array vazio só carrega uma vez, no carregamento da tela
+
     return (
         <PageDefault>
             <h1>Cadastro de Categoria: {values.nome}</h1>
@@ -49,67 +64,36 @@ function CadastroCategoria() {
             <form onSubmit={handleSubmit}>
 
                 <FormField 
-                    placeholder='Categoria'
+                    label='Categoria'
                     type="text"
                     name='nome'
                     value={values.nome}
                     onChange={handleChange}
                 />
-
-                {/* <div> 
-                    <label >
-                    Categoria:
-                        <input 
-                        type="text"
-                        name='nome' 
-                        value={values.nome}
-                        onChange={handleChange}
-                        />
-                    </label>
-                </div> */}
-
-                <FormField 
-                    placeholder='Descrição'
-                    type="text"
+               <FormField 
+                    label='Descrição'
+                    type="textarea"
                     name='descricao'
                     value={values.descricao}
                     onChange={handleChange}
                 />
-
-                {/* <div> 
-                    <label >
-                    Descrição:
-                        <textarea 
-                        type="text"
-                        name='descricao' 
-                        value={values.descricao}
-                        onChange={handleChange}
-                        />
-                    </label>
-                </div> */}
-
                 <FormField 
-                    placeholder='Cor:'
+                    label='Cor'
                     type="color"
                     name='cor'
                     value={values.cor}
                     onChange={handleChange}
                 />
-                {/* <div> 
-                    <label >
-                    Cor:
-                        <input 
-                        type="color" 
-                        name='cor'
-                        value={values.cor}
-                        onChange={handleChange}
-                        />
-                    </label>
-                </div>   */}
                 <Button>
                     Cadastrar
                 </Button>
             </form>
+
+            {categorias.lenght === 0 && (
+                <div>
+                    Loading...
+                </div>
+            )}
 
             <ul>
                 {categorias.map((categoria, index) => {
