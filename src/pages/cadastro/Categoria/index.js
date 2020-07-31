@@ -3,32 +3,19 @@ import { Link } from 'react-router-dom';
 import PageDefault from '../../../components/PageDefault';
 import FormField from '../../../components/FormField';
 import { Button } from '../../../components/FormField/style';
+import useForm from '../../../hooks/useForm';
+
 
 function CadastroCategoria() {
   const valoresIniciais = {
     nome: '',
     descricao: '',
-    cor: '#000',
+    cor: '#000000',
   };
 
+  const { handleChange, values, clearForm } = useForm(valoresIniciais)
+
   const [categorias, setCategorias] = useState([]);
-
-  const [values, setValues] = useState(valoresIniciais);
-
-  function setValue(key, value) {
-    setValues({
-      ...values,
-      [key]: value,
-    });
-  }
-
-  function handleChange(event) {
-    // const { getAttribute, value } = event.target
-    setValue(
-      event.target.getAttribute('name'),
-      event.target.value,
-    );
-  }
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -38,13 +25,17 @@ function CadastroCategoria() {
       values,
     ]);
 
-    setValues(valoresIniciais); // zera o input após cadastrar
+    clearForm(); // zera o input após cadastrar
   }
 
   useEffect(() => { // quando queremos que algum efeito colateral aconteça
     // estou pegando informações do back end
-
+    
     const url = 'http://localhost:5000/categorias';
+
+    // const url = window.location.hostname.includes('localhost')
+    // ? 'http://localhost:5000/categorias'
+    // : 'http://learningflix.herokuapp.com/categorias'
 
     fetch(url)
       .then(async (respostaServidor) => {
@@ -98,7 +89,7 @@ function CadastroCategoria() {
 
       <ul>
         {categorias.map((categoria, index) => (
-          <li key={`${categoria}${index}`}>
+          <li key={`${categoria.nome}${index}`}>
             {categoria.nome}
           </li>
         ))}
