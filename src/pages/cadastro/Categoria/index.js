@@ -44,7 +44,7 @@ function CadastroCategoria() {
   useEffect(() => { // quando queremos que algum efeito colateral aconteça
     // estou pegando informações do back end
 
-    const url = 'http://localhost:8080/categorias';
+    const url = 'http://localhost:5000/categorias';
 
     fetch(url)
       .then(async (respostaServidor) => {
