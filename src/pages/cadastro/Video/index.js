@@ -27,30 +27,31 @@ function CadastroVideo() {
 				})
 	}, [])
 
+	function handleSubmit(event) {
+		event.preventDefault()
+
+			const categoriaEscolhida = categorias.find((categoria) => {
+					return categoria.titulo === values.categoria   
+			})
+
+			videosRepository.create({
+				categoriaId: categoriaEscolhida.id,
+				titulo: values.titulo,
+				url: values.url,
+			})
+				.then(() => {
+					console.log('Sucesso')
+					history.push('/')
+				})
+	}
+
 
 	return (
 		<PageDefault>
 			<h1>Cadastro de Vídeo</h1>
 
-			<form onSubmit={(event) => {
+			<form onSubmit={handleSubmit} >
 
-				event.preventDefault()
-
-				const categoriaEscolhida = categorias.find((categoria) => {
-						return categoria.titulo === values.categoria   
-				})
-
-				videosRepository.create({
-					categoriaId: categoriaEscolhida.id,
-					titulo: values.titulo,
-					url: values.url,
-				})
-					.then(() => {
-						console.log('Sucesso')
-						history.push('/')
-					})
-
-			}} >
 						<FormField 
 								label="Título do Vídeo"
 								name="titulo"

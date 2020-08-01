@@ -3,32 +3,32 @@
     {
       "id": 1,
       "titulo": "Inglês",
-      "cor": "#6BD1FF"
+      "cor": "blue"
     },
     {
       "id": 2,
       "titulo": "Espanhol",
-      "cor": "#00C86F"
+      "cor": "#ffbf00"
     },
     {
       "id": 3,
       "titulo": "Alemão",
-      "cor": "#9cd33b"
+      "cor": "#333"
     },
     {
       "id": 4,
       "titulo": "Italiano",
-      "cor": "orange"
+      "cor": "green"
     },
     {
       "id": 5,
       "titulo": "Francês",
-      "cor": "red"
+      "cor": "purple"
     },
     {
       "id": 6,
       "titulo": "Russo",
-      "cor": "#7a11bd"
+      "cor": "red"
     }
   ],
   "videos": [

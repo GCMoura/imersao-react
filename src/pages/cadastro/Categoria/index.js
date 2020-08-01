@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import PageDefault from '../../../components/PageDefault';
 import FormField from '../../../components/FormField';
-import { Button } from '../../../components/FormField/style';
+import Button from '../../../components/Button'
 import useForm from '../../../hooks/useForm';
 
 
@@ -30,12 +30,10 @@ function CadastroCategoria() {
 
   useEffect(() => { 
     // estou pegando informações do back end
-    
-    const url = 'http://localhost:5000/categorias';
 
-    // const url = window.location.hostname.includes('localhost')
-    // ? 'http://localhost:5000/categorias'
-    // : 'http://learningflix.herokuapp.com/categorias'
+    const url = window.location.hostname.includes('localhost')
+    ? 'http://localhost:5000/categorias'
+    : 'https://learningflix-react.vercel.app/categorias'
 
     fetch(url)
       .then(async (respostaServidor) => {
