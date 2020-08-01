@@ -28,7 +28,7 @@ function CadastroCategoria() {
     clearForm(); // zera o input após cadastrar
   }
 
-  useEffect(() => { // quando queremos que algum efeito colateral aconteça
+  useEffect(() => { 
     // estou pegando informações do back end
     
     const url = 'http://localhost:5000/categorias';
@@ -89,8 +89,8 @@ function CadastroCategoria() {
 
       <ul>
         {categorias.map((categoria, index) => (
-          <li key={`${categoria.nome}${index}`}>
-            {categoria.nome}
+          <li key={`${categoria.titulo}${index}`}>
+            {categoria.titulo}
           </li>
         ))}
       </ul>

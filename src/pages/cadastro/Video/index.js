@@ -10,43 +10,40 @@ import categoriesRepository from '../../../repositories/categorias'
 
 function CadastroVideo() {
 	const history = useHistory()
-
 	const [categorias, setCategorias] = useState([])
-
 	const categoryTitles = categorias.map(( {titulo} ) => titulo);
-
+	
 	const { handleChange, values} = useForm({
-		titulo: 'Video padrão',
-		url: 'https://www.youtube.com/watch?v=ABXEs47qToU',
-		categoria: 'Front End'
+		titulo: '',
+		url: '',
+		categoria: ''
 	})
-
+	
 	useEffect(() => {
 		categoriesRepository
-			.getAll()
-			.then((categoriasFromServer) => {
+		.getAll()
+		.then((categoriasFromServer) => {
 					setCategorias(categoriasFromServer)
-			})
+				})
 	}, [])
 
-	console.log(categoryTitles)
 
 	return (
 		<PageDefault>
 			<h1>Cadastro de Vídeo</h1>
 
-			<form onSubmit={() => {
+			<form onSubmit={(event) => {
+
+				event.preventDefault()
 
 				const categoriaEscolhida = categorias.find((categoria) => {
 						return categoria.titulo === values.categoria   
 				})
 
-				console.log(categoriaEscolhida)
-
 				videosRepository.create({
+					categoriaId: categoriaEscolhida.id,
 					titulo: values.titulo,
 					url: values.url,
-					categoriaId: categoriaEscolhida.id,
 				})
 					.then(() => {
 						console.log('Sucesso')
